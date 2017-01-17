@@ -20,143 +20,83 @@ extern keymap_config_t keymap_config;
 #define _LOWER 3
 #define _RAISE 4
 #define _PLOVER 5
+#define _NAVIGATION 6
+#define _GUI_LAYER 7
 #define _ADJUST 16
 
+// Macros
+#define LALT_BRACE 0
+#define RALT_BRACE 1
+
+#ifdef AUDIO_ENABLE
 #define BETTER_STARTUP_SOUND \
-Q__NOTE(_F4), \
-Q__NOTE(_G4), \
-Q__NOTE(_BF4), \
-Q__NOTE(_G4), \
-HD_NOTE(_D5), \
-HD_NOTE(_D5), \
-W__NOTE(_C5), \
-S__NOTE(_REST), \
-Q__NOTE(_F4), \
-Q__NOTE(_G4), \
-Q__NOTE(_BF4), \
-Q__NOTE(_G4), \
-HD_NOTE(_C5), \
-HD_NOTE(_C5), \
-W__NOTE(_BF4), \
-S__NOTE(_REST), \
-Q__NOTE(_F4), \
-Q__NOTE(_G4), \
-Q__NOTE(_BF4), \
-Q__NOTE(_G4), \
-W__NOTE(_BF4), \
-H__NOTE(_C5), \
-H__NOTE(_A4), \
-H__NOTE(_A4), \
-H__NOTE(_G4), \
-H__NOTE(_F4), \
-H__NOTE(_F4), \
-W__NOTE(_C5), \
-W__NOTE(_BF4)
+  Q__NOTE(_F4), Q__NOTE(_G4), Q__NOTE(_BF4), \
+  Q__NOTE(_G4), HD_NOTE(_D5), HD_NOTE(_D5), \
+  W__NOTE(_C5), S__NOTE(_REST), Q__NOTE(_F4), \
+  Q__NOTE(_G4), Q__NOTE(_BF4), Q__NOTE(_G4), \
+  HD_NOTE(_C5), HD_NOTE(_C5), W__NOTE(_BF4), \
+  S__NOTE(_REST), Q__NOTE(_F4), Q__NOTE(_G4), \
+  Q__NOTE(_BF4), Q__NOTE(_G4), W__NOTE(_BF4), \
+  H__NOTE(_C5), H__NOTE(_A4), H__NOTE(_A4), \
+  H__NOTE(_G4), H__NOTE(_F4), H__NOTE(_F4), \
+  W__NOTE(_C5), W__NOTE(_BF4)
 
 #define ONE_UP_SOUND \
-Q__NOTE(_E6  ), \
-Q__NOTE(_G6  ), \
-Q__NOTE(_E7  ), \
-Q__NOTE(_C7  ), \
-Q__NOTE(_D7  ), \
-Q__NOTE(_G7  )
+  Q__NOTE(_E6  ), Q__NOTE(_G6  ), Q__NOTE(_E7  ), \
+  Q__NOTE(_C7  ), Q__NOTE(_D7  ), Q__NOTE(_G7  )
 
 #define STILL_DRE \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6)
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
+  ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6)
 
 #define ZELDA \
-Q__NOTE(_G5), \
-Q__NOTE(_A5), \
-Q__NOTE(_B5), \
-Q__NOTE(_CS6), \
-Q__NOTE(_G5), \
-Q__NOTE(_A5), \
-Q__NOTE(_B5), \
-Q__NOTE(_CS6), \
-Q__NOTE(_GS5), \
-Q__NOTE(_AS5), \
-Q__NOTE(_C6), \
-Q__NOTE(_D6), \
-Q__NOTE(_GS5), \
-Q__NOTE(_AS5), \
-Q__NOTE(_C6), \
-Q__NOTE(_D6), \
-Q__NOTE(_A5), \
-Q__NOTE(_B5), \
-Q__NOTE(_CS6), \
-Q__NOTE(_DS6), \
-Q__NOTE(_A5), \
-Q__NOTE(_B5), \
-Q__NOTE(_CS6), \
-Q__NOTE(_DS6), \
-Q__NOTE(_AS5), \
-Q__NOTE(_C6), \
-Q__NOTE(_D6), \
-Q__NOTE(_E6), \
-Q__NOTE(_AS5), \
-Q__NOTE(_C6), \
-Q__NOTE(_D6), \
-Q__NOTE(_E6), \
-Q__NOTE(_B5), \
-Q__NOTE(_CS6), \
-Q__NOTE(_DS6), \
-Q__NOTE(_F6), \
-Q__NOTE(_C6), \
-Q__NOTE(_D6), \
-Q__NOTE(_E6), \
-Q__NOTE(_FS6), \
-Q__NOTE(_CS6), \
-Q__NOTE(_DS6), \
-Q__NOTE(_F6), \
-Q__NOTE(_G6), \
-Q__NOTE(_D6), \
-Q__NOTE(_E6), \
-Q__NOTE(_FS6), \
-Q__NOTE(_GS6), \
-S__NOTE(_REST), \
-Q__NOTE(_A6), \
-Q__NOTE(_AS6), \
-Q__NOTE(_B6), \
-HD_NOTE(_C7)
+  Q__NOTE(_G5), Q__NOTE(_A5), Q__NOTE(_B5), \
+  Q__NOTE(_CS6), Q__NOTE(_G5), Q__NOTE(_A5), \
+  Q__NOTE(_B5), Q__NOTE(_CS6), Q__NOTE(_GS5), \
+  Q__NOTE(_AS5), Q__NOTE(_C6), Q__NOTE(_D6), \
+  Q__NOTE(_GS5), Q__NOTE(_AS5), Q__NOTE(_C6), \
+  Q__NOTE(_D6), Q__NOTE(_A5), Q__NOTE(_B5), \
+  Q__NOTE(_CS6), Q__NOTE(_DS6), Q__NOTE(_A5), \
+  Q__NOTE(_B5), Q__NOTE(_CS6), Q__NOTE(_DS6), \
+  Q__NOTE(_AS5), Q__NOTE(_C6), Q__NOTE(_D6), \
+  Q__NOTE(_E6), Q__NOTE(_AS5), Q__NOTE(_C6), \
+  Q__NOTE(_D6), Q__NOTE(_E6), Q__NOTE(_B5), \
+  Q__NOTE(_CS6), Q__NOTE(_DS6), Q__NOTE(_F6), \
+  Q__NOTE(_C6), Q__NOTE(_D6), Q__NOTE(_E6), \
+  Q__NOTE(_FS6), Q__NOTE(_CS6), Q__NOTE(_DS6), \
+  Q__NOTE(_F6), Q__NOTE(_G6), Q__NOTE(_D6), \
+  Q__NOTE(_E6), Q__NOTE(_FS6), Q__NOTE(_GS6), \
+  S__NOTE(_REST), Q__NOTE(_A6), Q__NOTE(_AS6), \
+  Q__NOTE(_B6), HD_NOTE(_C7)
 
 #define ZELDA_PUZZLE \
-Q__NOTE(_G5), \
-Q__NOTE(_FS5), \
-Q__NOTE(_DS5), \
-Q__NOTE(_A4), \
-Q__NOTE(_GS4), \
-Q__NOTE(_E5), \
-Q__NOTE(_GS5), \
-HD_NOTE(_C6)
+  Q__NOTE(_G5), Q__NOTE(_FS5), Q__NOTE(_DS5), \
+  Q__NOTE(_A4), Q__NOTE(_GS4), Q__NOTE(_E5), \
+  Q__NOTE(_GS5), HD_NOTE(_C6)
 
 #define SONIC_RING \
-E__NOTE(_E6), \
-E__NOTE(_G6), \
-HD_NOTE(_C7)
+  E__NOTE(_E6), E__NOTE(_G6), HD_NOTE(_C7)
 
 #define HUNGER_GAMES \
-WD_NOTE(_G5), \
-S__NOTE(_REST), \
-WD_NOTE(_BF5), \
-S__NOTE(_REST), \
-WD_NOTE(_A5), \
-S__NOTE(_REST), \
-WD_NOTE(_D5)
+  WD_NOTE(_G5), S__NOTE(_REST), WD_NOTE(_BF5), \
+  S__NOTE(_REST), WD_NOTE(_A5), S__NOTE(_REST), \
+  WD_NOTE(_D5)
+
+#endif
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
@@ -171,31 +111,40 @@ enum planck_keycodes {
 
 // Fillers to make layering more clear
 #define _______ KC_TRNS
-#define XXXXXXX KC_NO
+#define ___x___ KC_NO
 
 // Custom macros
 #define CTL_ESC CTL_T(KC_ESC) // Tap for Esc, hold for Ctrl
 #define SFT_ENT SFT_T(KC_ENT) // Tap for Enter, hold for Shift
 #define SFT_SPC SFT_T(KC_SPC) // Tap for Space, hold for Shift
 
+#define KC_LCES F(5) // Tap for Esc, hold for Ctrl
+#define KC_RCEN F(6) // Tap for Enter, holf for Ctrl
+
+// Raise = Fn1
+// Lower = Fn2
+// Naviation = Fn4
+// Gui = Fn3
+// Adjust
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
- * ,------------------------------------------------------------------------------------------.
- * | Tab    |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp      |
- * |--------+------+------+------+------+-------------+------+------+------+------+-----------|
- * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "        |
- * |--------+------+------+------+------+------|------+------+------+------+------+-----------|
- * | Shift  |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift/Enter|
- * |--------+------+------+------+------+------+------+------+------+------+------+-----------|
- * | Brite  | Ctrl | Alt  | GUI  |Lower | Shift/Space |Raise | Left | Down |  Up  | Right     |
- * `------------------------------------------------------------------------------------------'
+ * ,-------------------------------------------------------------------------------------------.
+ * | Tab      |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | '        |
+ * |----------+------+------+------+------+-------------+------+------+------+------+----------|
+ * | Ctrl Esc |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |; Fn4 | Ctrl Ent |
+ * |----------+------+------+------+------+------|------+------+------+------+------+----------|
+ * | Shift (  |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift )   |
+ * |----------+------+------+------+------+------+------+------+------+------+------+----------|
+ * | Fn3 [    | Ctrl | Alt  | GUI  |Lower |    Space    |Raise | GUI  | Alt  | Ctrl | Fn3 ]    |
+ * `-------------------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
-  {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,     KC_Y,     KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
-  {CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,     KC_H,     KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_N,     KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SFT_ENT},
-  {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,   KC_SPC,   RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,     KC_Y,     KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT},
+  {KC_LCES, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,     KC_H,     KC_J,    KC_K,    KC_L,    F(1),    KC_RCEN},
+  {KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,     KC_N,     KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC},
+  {F(3),    KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,   KC_SPC,   RAISE,   KC_RGUI, KC_RALT, KC_RCTL, F(4)   }
 },
 
 /* Colemak
@@ -210,10 +159,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = {
-  {KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
-  {KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {_______, KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,  KC_U,    KC_Y,    KC_SCLN, _______},
+  {_______, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,  KC_E,    KC_I,    F(2),    _______},
+  {_______, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,  KC_COMM, KC_DOT,  KC_SLSH, _______},
+  {_______, _______, _______, _______, LOWER,   KC_SPC,  KC_SPC,  RAISE, _______, _______, _______, _______}
 },
 
 /* Dvorak
@@ -228,10 +177,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_DVORAK] = {
-  {KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC},
-  {KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH},
-  {KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT },
-  {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {_______, KC_QUOT, KC_COMM, KC_DOT,  KC_P,  KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    _______},
+  {_______, KC_A,    KC_O,    KC_E,    KC_U,  KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    _______},
+  {_______, KC_SCLN, KC_Q,    KC_J,    KC_K,  KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    _______},
+  {_______, _______, _______, _______, LOWER, KC_SPC,  KC_SPC,  RAISE,   _______, _______, _______, _______}
 },
 
 /* Lower
@@ -242,14 +191,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO ~ |ISO | |      |      |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |  Backspace  |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
   {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC},
   {KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE},
   {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,S(KC_NUHS),S(KC_NUBS),_______, _______, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {_______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
 },
 
 /* Raise
@@ -260,14 +209,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |ISO # |ISO / |      |      |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
+ * |      |      |      |      |      |   Delete    |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
   {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC},
   {KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS},
   {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, _______, _______, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {_______, _______, _______, _______, _______, KC_DEL,  KC_DEL,  _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
 },
 
 /* Plover layer (http://opensteno.org)
@@ -283,9 +232,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_PLOVER] = {
   {KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1   },
-  {XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC},
-  {XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX}
+  {___x___, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC},
+  {___x___, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
+  {EXT_PLV, ___x___, ___x___, KC_C,    KC_V,    ___x___, ___x___, KC_N,    KC_M,    ___x___, ___x___, ___x___}
+},
+
+/* Navigation
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      | Up   |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Del  |      | Home | PgUp | PgDn | End  |      | Left | Down | Rght |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |      |      |      |      |    Space    |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_NAVIGATION] = {
+  {KC_BSPC, KC_DEL,  ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, KC_UP,   ___x___, ___x___, ___x___},
+  {_______, ___x___, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  ___x___, KC_LEFT, KC_DOWN, KC_RGHT, F(1),    _______},
+  {_______, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, ___x___, _______},
+  {_______, _______, _______, _______, ___x___, KC_SPC,  KC_SPC,  ___x___, _______, _______, _______, _______}
+},
+
+/* GUI (window management/mouse/media controls) layer
+ *
+ *        Mouse keys -----/```````````````````\               /```````````````````\----- Window manager
+ *                ,-----------------------------------------------------------------------.
+ *                |     |Ms B2|Ms Up|Ms B1|Ms WD|     |     |Prev | TL  | Top | TR  |     |
+ *                |-----------------------------------------------------------------------|
+ *                |     |Ms L |Ms Dn|Ms R |Ms WU|     |     |Full |Left |Centr|Right|     |
+ *                |-----------------------------------------------------------------------|
+ *                |     |Ms WL|Ms B3|Ms WR|     |     |     |Next | BL  | Bot | BR  |     |
+ *                |-----------------------------------------------------------------------|
+ *                |     |Prev |Play |Next |Brig-|   Sleep   |Brig+|Mute |Vol- |Vol+ |     |
+ *                `-----------------------------------------------------------------------'
+ *                        \___ Media ___/   \___ Screen/sleep __/   \___ Volume __/
+ */
+[_GUI_LAYER] = {
+  {_______, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_D, ___x___, ___x___, LCTL(LALT(LGUI(KC_LEFT))), LCTL(LGUI(KC_LEFT)),    LALT(LGUI(KC_UP)),   LCTL(LGUI(KC_RGHT)),    _______},
+  {_______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U, ___x___, ___x___, LALT(LGUI(KC_F)),          LALT(LGUI(KC_LEFT)),    LALT(LGUI(KC_C)),    LALT(LGUI(KC_RGHT)),    _______},
+  {_______, KC_WH_L, KC_BTN3, KC_WH_R, ___x___, ___x___, ___x___, LCTL(LALT(LGUI(KC_RGHT))), S(LCTL(LGUI(KC_LEFT))), LALT(LGUI(KC_DOWN)), S(LCTL(LGUI(KC_RGHT))), _______},
+  {_______, KC_MPRV, KC_MPLY, KC_MNXT, KC_SLCK, KC_SLEP, KC_SLEP, KC_PAUS,                   KC_MUTE,                KC_VOLD,             KC_VOLU,                _______}
 },
 
 /* Adjust (Lower + Raise)
@@ -306,22 +294,71 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
 
-
 };
 
+const uint16_t PROGMEM fn_actions[] = {
+  // Layer switching
+  [1] = ACTION_LAYER_TAP_KEY(_NAVIGATION, KC_SCOLON),
+  [2] = ACTION_LAYER_TAP_KEY(_NAVIGATION, KC_O),
+  [3] = ACTION_LAYER_TAP_KEY(_GUI_LAYER, KC_LBRACKET),
+  [4] = ACTION_LAYER_TAP_KEY(_GUI_LAYER, KC_RBRACKET),
+
+  // Modifiers
+  [5] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_ESC),
+  [6] = ACTION_MODS_TAP_KEY(MOD_RCTL, KC_ENT),
+};
+
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
+{
+  switch(id) {
+    case LALT_BRACE:
+      if (record->event.pressed) {
+        register_mods(MOD_LALT);
+        record->tap.interrupted = 0;
+      } else {
+        unregister_mods(MOD_LALT);
+
+        if (record->tap.count && !record->tap.interrupted) {
+          add_weak_mods(MOD_LSFT);
+          register_code(KC_LBRACKET);
+          unregister_code(KC_LBRACKET);
+          del_weak_mods(MOD_LSFT);
+        }
+
+        record->tap.count = 0;
+      }
+      break;
+    case RALT_BRACE:
+      if (record->event.pressed) {
+        register_mods(MOD_RALT);
+        record->tap.interrupted = 0;
+      } else {
+        unregister_mods(MOD_RALT);
+
+        if (record->tap.count && !record->tap.interrupted) {
+          add_weak_mods(MOD_LSFT);
+          register_code(KC_RBRACKET);
+          unregister_code(KC_RBRACKET);
+          del_weak_mods(MOD_LSFT);
+        }
+
+        record->tap.count = 0;
+      }
+      break;
+  }
+  return MACRO_NONE;
+}
+
 #ifdef AUDIO_ENABLE
-
-float tone_startup[][2]    = SONG(ZELDA_PUZZLE);
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-float tone_dvorak[][2]     = SONG(DVORAK_SOUND);
-float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
-float tone_plover[][2]     = SONG(PLOVER_SOUND);
-float tone_plover_gb[][2]  = SONG(PLOVER_GOODBYE_SOUND);
-float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
-
-float tone_goodbye[][2] = SONG(HUNGER_GAMES);
+float tone_startup[][2]   = SONG(ZELDA_PUZZLE);
+float tone_qwerty[][2]    = SONG(QWERTY_SOUND);
+float tone_dvorak[][2]    = SONG(DVORAK_SOUND);
+float tone_colemak[][2]   = SONG(COLEMAK_SOUND);
+float tone_plover[][2]    = SONG(PLOVER_SOUND);
+float tone_plover_gb[][2] = SONG(PLOVER_GOODBYE_SOUND);
+float music_scale[][2]    = SONG(MUSIC_SCALE_SOUND);
+float tone_goodbye[][2]   = SONG(HUNGER_GAMES);
 #endif
-
 
 void persistant_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
