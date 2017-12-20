@@ -22,14 +22,6 @@ extern keymap_config_t keymap_config;
 #define _NUMPAD 5
 #define _ADJUST 16
 
-#define ONE_UP_SOUND \
-Q__NOTE(_E6  ), \
-Q__NOTE(_G6  ), \
-Q__NOTE(_E7  ), \
-Q__NOTE(_C7  ), \
-Q__NOTE(_D7  ), \
-Q__NOTE(_G7  )
-
 #define ZELDA \
 Q__NOTE(_G5), \
 Q__NOTE(_A5), \
@@ -83,21 +75,6 @@ S__NOTE(_REST), \
 Q__NOTE(_A6), \
 Q__NOTE(_AS6), \
 Q__NOTE(_B6), \
-HD_NOTE(_C7)
-
-#define ZELDA_PUZZLE \
-Q__NOTE(_G5), \
-Q__NOTE(_FS5), \
-Q__NOTE(_DS5), \
-Q__NOTE(_A4), \
-Q__NOTE(_GS4), \
-Q__NOTE(_E5), \
-Q__NOTE(_GS5), \
-HD_NOTE(_C6)
-
-#define SONIC_RING \
-E__NOTE(_E6), \
-E__NOTE(_G6), \
 HD_NOTE(_C7)
 
 #define HUNGER_GAMES \
@@ -282,7 +259,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case QWERTY:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
+          PLAY_SONG(tone_qwerty);
         #endif
         persistant_default_layer_set(1UL<<_QWERTY);
       }
@@ -291,7 +268,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case COLEMAK:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_colemak, false, 0);
+          PLAY_SONG(tone_colemak);
         #endif
         persistant_default_layer_set(1UL<<_COLEMAK);
       }
@@ -300,7 +277,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DVORAK:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_dvorak, false, 0);
+          PLAY_SONG(tone_dvorak);
         #endif
         persistant_default_layer_set(1UL<<_DVORAK);
       }
@@ -351,11 +328,11 @@ void matrix_init_user(void) {
 
 void startup_user() {
     _delay_ms(20); // gets rid of tick
-    PLAY_NOTE_ARRAY(tone_startup, false, 0);
+    PLAY_SONG(tone_startup);
 }
 
 void shutdown_user() {
-    PLAY_NOTE_ARRAY(tone_goodbye, false, 0);
+    PLAY_SONG(tone_goodbye);
     _delay_ms(150);
     stop_all_notes();
 }
@@ -365,7 +342,7 @@ void music_on_user(void) {
 }
 
 void music_scale_user(void) {
-    PLAY_NOTE_ARRAY(music_scale, false, 0);
+    PLAY_SONG(music_scale);
 }
 
 #endif

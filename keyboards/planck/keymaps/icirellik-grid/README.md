@@ -15,8 +15,8 @@ $ sudo apt-get install gcc unzip wget zip gcc-avr binutils-avr avr-libc dfu-prog
 Compile the keymap and then install it.
 
 ```sh
-$ make icirellik-grid
+$ make plankck/rev4:icirellik-grid
 
 # Set your keyboard to program mode before running thtis command.
-$ make keymap=icirellik-grid dfu
+$ make planck/rev4:icriellik-grid:dfu
 ```
