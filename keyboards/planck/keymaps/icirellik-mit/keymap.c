@@ -22,63 +22,6 @@ extern keymap_config_t keymap_config;
 #define _PLOVER 5
 #define _ADJUST 16
 
-#define BETTER_STARTUP_SOUND \
-Q__NOTE(_F4), \
-Q__NOTE(_G4), \
-Q__NOTE(_BF4), \
-Q__NOTE(_G4), \
-HD_NOTE(_D5), \
-HD_NOTE(_D5), \
-W__NOTE(_C5), \
-S__NOTE(_REST), \
-Q__NOTE(_F4), \
-Q__NOTE(_G4), \
-Q__NOTE(_BF4), \
-Q__NOTE(_G4), \
-HD_NOTE(_C5), \
-HD_NOTE(_C5), \
-W__NOTE(_BF4), \
-S__NOTE(_REST), \
-Q__NOTE(_F4), \
-Q__NOTE(_G4), \
-Q__NOTE(_BF4), \
-Q__NOTE(_G4), \
-W__NOTE(_BF4), \
-H__NOTE(_C5), \
-H__NOTE(_A4), \
-H__NOTE(_A4), \
-H__NOTE(_G4), \
-H__NOTE(_F4), \
-H__NOTE(_F4), \
-W__NOTE(_C5), \
-W__NOTE(_BF4)
-
-#define ONE_UP_SOUND \
-Q__NOTE(_E6  ), \
-Q__NOTE(_G6  ), \
-Q__NOTE(_E7  ), \
-Q__NOTE(_C7  ), \
-Q__NOTE(_D7  ), \
-Q__NOTE(_G7  )
-
-#define STILL_DRE \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_CS6), E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_AS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6), \
-ED_NOTE(_C6) , E__NOTE(_F6), ED_NOTE(_GS6)
-
 #define ZELDA \
 Q__NOTE(_G5), \
 Q__NOTE(_A5), \
@@ -132,21 +75,6 @@ S__NOTE(_REST), \
 Q__NOTE(_A6), \
 Q__NOTE(_AS6), \
 Q__NOTE(_B6), \
-HD_NOTE(_C7)
-
-#define ZELDA_PUZZLE \
-Q__NOTE(_G5), \
-Q__NOTE(_FS5), \
-Q__NOTE(_DS5), \
-Q__NOTE(_A4), \
-Q__NOTE(_GS4), \
-Q__NOTE(_E5), \
-Q__NOTE(_GS5), \
-HD_NOTE(_C6)
-
-#define SONIC_RING \
-E__NOTE(_E6), \
-E__NOTE(_G6), \
 HD_NOTE(_C7)
 
 #define HUNGER_GAMES \
@@ -318,8 +246,8 @@ float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
 float tone_plover[][2]     = SONG(PLOVER_SOUND);
 float tone_plover_gb[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
+float tone_goodbye[][2]    = SONG(HUNGER_GAMES);
 
-float tone_goodbye[][2] = SONG(HUNGER_GAMES);
 #endif
 
 
@@ -333,7 +261,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case QWERTY:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_qwerty, false, 0);
+          PLAY_SONG(tone_qwerty);
         #endif
         persistant_default_layer_set(1UL<<_QWERTY);
       }
@@ -342,7 +270,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case COLEMAK:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_colemak, false, 0);
+          PLAY_SONG(tone_colemak);
         #endif
         persistant_default_layer_set(1UL<<_COLEMAK);
       }
@@ -351,7 +279,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DVORAK:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_dvorak, false, 0);
+          PLAY_SONG(tone_dvorak);
         #endif
         persistant_default_layer_set(1UL<<_DVORAK);
       }
@@ -392,7 +320,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
           stop_all_notes();
-          PLAY_NOTE_ARRAY(tone_plover, false, 0);
+          PLAY_SONG(tone_plover);
         #endif
         layer_off(_RAISE);
         layer_off(_LOWER);
@@ -410,7 +338,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case EXT_PLV:
       if (record->event.pressed) {
         #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(tone_plover_gb, false, 0);
+          PLAY_SONG(tone_plover_gb);
         #endif
         layer_off(_PLOVER);
       }
@@ -428,27 +356,23 @@ void matrix_init_user(void) {
 
 #ifdef AUDIO_ENABLE
 
-void startup_user()
-{
+void startup_user() {
     _delay_ms(20); // gets rid of tick
-    PLAY_NOTE_ARRAY(tone_startup, false, 0);
+    PLAY_SONG(tone_startup);
 }
 
-void shutdown_user()
-{
-    PLAY_NOTE_ARRAY(tone_goodbye, false, 0);
+void shutdown_user() {
+    PLAY_SONG(tone_goodbye);
     _delay_ms(150);
     stop_all_notes();
 }
 
-void music_on_user(void)
-{
+void music_on_user(void) {
     music_scale_user();
 }
 
-void music_scale_user(void)
-{
-    PLAY_NOTE_ARRAY(music_scale, false, 0);
+void music_scale_user(void) {
+    PLAY_SONG(music_scale);
 }
 
 #endif
